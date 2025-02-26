@@ -34,8 +34,12 @@ fn test_small_kmeans() {
         [1024.0f32, 17.0f32],
         [1171.0f32, 20.0f32],
     ]);
-    let expected_means = arr2(&[[1060.0, 1060.0], [1097.5, 18.5], [2.0, 2.0]]);
-    let expected_clusters = vec![2, 2, 2, 0, 0, 0, 1, 1];
+    let expected_means = arr2(&[
+        [2.0, 2.0],
+        [1060.0, 1060.0],
+        [1097.5, 18.5],
+    ]);
+    let expected_clusters = vec![0, 0, 0, 1, 1, 1, 2, 2];
     let config = Config::from(Some(0), None, None);
     let (means, clusters) = kmeans_lloyd_with_config(&d.view(), 3, &config);
     println!("{:?}", means);
