@@ -57,7 +57,7 @@ fn plot_means_clusters(data: &ArrayView2<f32>, means: &ArrayView2<f32>, clusters
         .set_label_area_size(LabelAreaPosition::Left, 40)
         .set_label_area_size(LabelAreaPosition::Bottom, 40)
         .caption("K Means Demo", ("Arial", 40))
-        .build_ranged(1.8f32..5.0f32, 0.0f32..3.0f32)
+        .build_cartesian_2d(1.8f32..5.0f32, 0.0f32..3.0f32)
         .unwrap();
 
     context.configure_mesh().draw().unwrap();

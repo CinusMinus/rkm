@@ -1,6 +1,7 @@
 // Serial (single threaded) implementation details
 use ndarray::{Array2, ArrayView2, Axis, Ix};
-use rand::distributions::{Distribution, WeightedIndex};
+use rand::distr::Distribution;
+use rand::distr::weighted::WeightedIndex;
 use rand::prelude::*;
 use rand::rngs::SmallRng;
 use rand::SeedableRng;
@@ -36,10 +37,10 @@ pub fn initialize_plusplus<V: Value>(
     let mut means = Array2::zeros((k as usize, data.shape()[1]));
     let mut rng = match seed {
         Some(seed) => SmallRng::seed_from_u64(seed),
-        None => SmallRng::from_rng(rand::thread_rng()).unwrap(),
+        None => SmallRng::from_rng(&mut rand::rng()),
     };
     let data_len = data.shape()[0];
-    let chosen = rng.gen_range(0, data_len) as isize;
+    let chosen = rng.random_range(0..data_len) as isize;
     means
         .slice_mut(s![0..1, ..])
         .assign(&data.slice(s![chosen..=chosen, ..]));
